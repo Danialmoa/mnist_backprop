@@ -75,12 +75,6 @@ class DrawingCanvas:
             coords = self.canvas.coords(item)
             draw.line(coords, fill='white', width=15)
 
-        # # For debugging - save the image to see what it looks like
-        # image.save('debug_digit.png') 
-        
-        # save images with
-        #image.save(f'real_word_test/debug_digit_{self.counter}.png')
-
         # Convert to grayscale and resize to 28x28
         img = image.convert('L')
         img = img.resize((28, 28))
@@ -96,6 +90,8 @@ class DrawingCanvas:
         confidence = predictions[0][predicted_digit]
         
         self.pred_label.config(text=f"Prediction: {predicted_digit} ({confidence:.2%})")
+        
+        # Save the image and prediction
         image.save(f'real_word_test/debug_digit_{self.counter}_{predicted_digit}.png')
         self.counter += 1
 
