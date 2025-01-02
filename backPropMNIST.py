@@ -10,7 +10,6 @@
 #       6. Design a module for plotting the results
 
 # Author: Danial Moafi
-# Date: 2024-11-25
 ####################################
 
 import numpy as np
@@ -32,6 +31,9 @@ class DataLoader:
         self.test_data = self.load_data(self.test_path)
         
     def __len__(self):
+        """
+        Return the length of the data
+        """
         return len(self.train_data)
 
     def load_data(self, path):
@@ -42,12 +44,18 @@ class DataLoader:
     
     @property
     def get_train_data(self):
+        """
+        Return the train data and labels
+        """
         train_labels = self.train_data['5'].to_numpy()
         train_data = self.train_data.drop(columns=['5']).to_numpy()
         return train_data, train_labels
     
     @property
     def get_test_data(self):
+        """
+        Return the test data and labels
+        """
         test_labels = self.test_data['7'].to_numpy()
         test_data = self.test_data.drop(columns=['7']).to_numpy()
         return test_data, test_labels
@@ -55,6 +63,9 @@ class DataLoader:
     
 class StopCriterion:
     def __init__(self, criteria, patience=5):
+        """
+        Initialize the stopping criterion
+        """
         self.criteria = criteria
         self.max_epochs = None
         self.loss_threshold = None
@@ -107,6 +118,9 @@ class StopCriterion:
         return std_loss < (mean_loss * 0.001)
         
     def check_max_epochs(self, epochs):
+        """
+        Check if the maximum number of epochs is reached
+        """
         return epochs >= self.max_epochs
 
         
@@ -300,6 +314,9 @@ class NeuralNetwork:
         self.augmentation = augmentation
     
     def check_run_number(self):
+        """
+        Check the run number for making check point files
+        """
         if os.path.exists(f"models/{self.model_name}"):
             run_numbers = [int(f.split('_')[1]) for f in os.listdir(f"models/{self.model_name}")]
             if len(run_numbers) == 0:
@@ -331,8 +348,6 @@ class NeuralNetwork:
             
         self.weights = self.weights_biases.weights
         self.biases = self.weights_biases.biases
-
-        
             
     def normalize_data(self, X):
         """
