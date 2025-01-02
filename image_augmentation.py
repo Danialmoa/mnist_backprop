@@ -5,11 +5,17 @@ from PIL import Image
 
 
 class ImageAugmentation:
+    """
+    Image augmentation class
+    """
     def __init__(self, image, label):
         self.image = image
         self.label = label
         
     def rotate(self, angle):
+        """
+        Rotate the image by a random angle between -angle and angle
+        """
         theta = np.radians(angle)
         cos_theta = np.cos(theta)
         sin_theta = np.sin(theta) 
@@ -37,6 +43,9 @@ class ImageAugmentation:
         return rotated
     
     def zoom(self, factor):
+        """
+        Zoom the image by a factor, it could be zoom in or zoom out
+        """
         height, width = self.image.shape
         new_height = int(height * factor)
         new_width = int(width * factor)
@@ -68,7 +77,10 @@ class ImageAugmentation:
         return gaussian_filter(self.image, sigma=kernel_size/3)
     
     def augment(self, angle=15, factor=0.5, kernel_size=3):
-        
+        """
+        Augment the image by rotating, zooming, and adding blur
+        and return the augmented image and label
+        """
         random_angles = np.random.randint(-angle, angle)
         random_factors = np.random.uniform(1-factor, 1+factor)
         random_kernel_sizes = np.random.randint(0.4, kernel_size)
@@ -81,6 +93,9 @@ class ImageAugmentation:
         return aug_img, self.label
 
     def remove_pixels_randomly(self, percentage):
+        """
+        Remove pixels randomly from the image
+        """
         width, height = self.image.shape
         num_pixels_to_remove = int(width * height * percentage)
         for _ in range(num_pixels_to_remove):
@@ -90,6 +105,9 @@ class ImageAugmentation:
         return self.image, self.label
     
     def remove_pixels_square(self, percentage):
+        """
+        Remove pixels from the image in a square shape
+        """
         width, height = self.image.shape
         square = int(width * percentage)
         if percentage > 0.3:
