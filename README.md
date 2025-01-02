@@ -27,8 +27,13 @@ The project consists of two main components:
 2. Testing with the interactive interface:
     python digitalRecogniser.py
 
+##  Download the MNIST dataset
+./start.sh
+
+
 ## Author
 
 Danial Moafi
 University of Siena
 Machine Learning Course 2024-2025
+
