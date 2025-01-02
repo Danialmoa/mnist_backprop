@@ -20,11 +20,6 @@ The project consists of two main components:
 - Interactive drawing interface for testing the model
 - Real-time digit prediction
 
-## Requirements
-
-- Python 3.x
-- NumPy
-
 ## Usage
 
 1. Training the model:
